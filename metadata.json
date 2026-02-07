@@ -1,0 +1,5 @@
+{
+  "name": "Data Augmentation for Low-Resource Indic Languages",
+  "description": "An expert NLP assistant to generate high-quality paraphrases, perform controlled data augmentation, and analyze semantic similarity for low-resource language datasets to improve model performance.",
+  "requestFramePermissions": []
+}
