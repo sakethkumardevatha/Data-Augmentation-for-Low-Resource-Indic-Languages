@@ -69,3 +69,70 @@ In essence, it gives researchers a powerful "what-if" analysis tool, allowing th
 *   **Human-in-the-Loop Feedback:** Add a mechanism for users to rate the quality of the generated augmentations, which can be used to further refine the underlying prompts.
 *   **Direct Data Export:** Create an option to export the generated augmented sentences in formats compatible with popular ML frameworks (e.g., Hugging Face Datasets).
 *   **Broader Language Support:** Systematically test and optimize the prompts to officially support a wider range of low-resource languages beyond the Indic family.
+
+
+## Setup Instructions
+
+This project is a static web application that runs entirely in the browser and requires no installation of dependencies.
+
+### Prerequisites
+
+1.  A modern web browser (e.g., Chrome, Firefox, Safari).
+2.  A local web server to serve the `index.html` file. If you don't have one, you can use the `serve` package or Python's built-in server.
+    *   **To install `serve`:** `npm install -g serve`
+3.  A **Google Gemini API Key**. You can obtain one from [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+### Running the Application
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
+    cd <repository-folder>
+    ```
+
+2.  **Provide the API Key:**
+    This application is designed to securely access the Gemini API key via a `process.env.API_KEY` environment variable that should be injected by the hosting environment. For local testing, you will need to manually replace the placeholder in `services/geminiService.ts`.
+
+    *   Open the file `services/geminiService.ts`.
+    *   Find the line: `const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });`
+    *   **Temporarily** replace `process.env.API_KEY` with your actual API key string:
+        ```typescript
+        // For local testing ONLY. Do not commit this change.
+        const ai = new GoogleGenAI({ apiKey: 'YOUR_API_KEY_HERE' }); 
+        ```
+    *   **Important:** Remember to revert this change before committing your code to a public repository.
+
+3.  **Start the local server:**
+    *   **Using `serve`:**
+        ```bash
+        serve .
+        ```
+    *   **Using Python 3:**
+        ```bash
+        python3 -m http.server
+        ```
+
+4.  **Open the App:**
+    Open your web browser and navigate to the local address provided by your server (e.g., `http://localhost:3000` or `http://localhost:8000`).
+
+## Testing Instructions
+
+There is no test login required for this application.
+
+1.  **Launch the App:** Once the local server is running, open the provided URL in your browser.
+
+2.  **Fill the Form:**
+    *   In the "Indic Language" input, type **`Hindi`**.
+    *   In the "Original Sentence" textarea, paste the following sentence: **`कल मौसम कैसा रहेगा?`**
+    *   Leave the default "Augmentation Methods" checked.
+
+3.  **Submit for Analysis:**
+    *   Click the **"Augment & Analyze"** button.
+
+4.  **Verify the Output:**
+    *   The button should become disabled, and a loading animation should appear in the right-hand panel.
+    *   After a few moments, the right panel should populate with the analysis results.
+    *   Confirm that all sections are visible: "Original Sentence", "Performance Summary", "Model Performance Comparison", and "Augmented Versions".
+    *   In the "Model Performance Comparison" table, check that the scores for each model generally increase across the three scenarios (Original < Augmented < Fine-Tuned + Aug).
+    *   Verify that several "Augmented Versions" cards are displayed at the bottom, each with a sentence and notes.
+
