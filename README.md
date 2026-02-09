@@ -1,5 +1,5 @@
 
-# Data Augmentation Assistant for Indic Languages
+# Data Augmentation & Transfer learning Assistant for Indic Languages
 
 This project is an interactive web application that serves as an expert NLP research assistant. It's designed to accelerate the development of high-performance models for low-resource Indic languages by intelligently augmenting data and simulating the potential impact on model performance.
 
